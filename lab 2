@@ -1,0 +1,110 @@
+package com.example.businesscardcompose_kotlin
+
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.content.contentReceiver
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            
+            Surface(modifier = Modifier.fillMaxSize(), color = Color(0xFFD2E8D4)) {
+                BusinessCardApp()
+            }
+        }
+    }
+}
+@Composable
+fun BusinessCardApp() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            Box(modifier = Modifier.background(Color(0xFF073042)).size(100.dp)) {
+                Image(
+                    painter = painterResource(id = android.R.drawable.ic_menu_camera),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize().padding(20.dp)
+                )
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                text = "NGUYEN VAN SANG 24CE064",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Light,
+                color = Color.Black
+            )
+            Text(
+                text = "COMPUTER ENGENEER",
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF006D3B)
+            )
+        }
+        Column(
+            modifier = Modifier.padding(bottom = 50.dp)
+        ) {
+            ContactRow(icon = Icons.Filled.Phone, text = "0348509173")
+            ContactRow(icon = Icons.Filled.Share, text = "NGUYEN VAN SANG 24CE064")
+            ContactRow(icon = Icons.Filled.Email, text = "sangnv.24ce@vku.udn.vn")
+        }
+    }
+}
+@Composable
+fun ContactRow(icon: ImageVector, text: String) {
+    Row(
+        modifier = Modifier.padding(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = Color(0xFF006D3B), // Màu xanh lá đậm
+            modifier = Modifier.size(24.dp)
+        )
+        Spacer(modifier = Modifier.width(20.dp))
+        Text(text = text, color = Color.Black)
+    }
+}
+
+// Cái này để xem trước giao diện bên phải mà không cần chạy máy ảo
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    Surface(modifier = Modifier.fillMaxSize(), color = Color(0xFFD2E8D4)) {
+        BusinessCardApp()
+    }
+}
+
